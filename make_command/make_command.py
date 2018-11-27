@@ -10,11 +10,11 @@ BUG_SRC_LOCATION = '/Users/koichi/autoBugRepair/defects4j/tmp/'
 src_bug_id = sys.argv[1]
 
 try:
-    srcjavafolder = subprocess.check_output('defects4j export -p dir.src.classes -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split())
-    srctestfolder = subprocess.check_output('defects4j export -p dir.src.tests -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split())
-    binjavafolder = subprocess.check_output('defects4j export -p dir.bin.classes -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split())
-    bintestfolder = subprocess.check_output('defects4j export -p cp.test -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split())
-    dependencies = subprocess.check_output('defects4j export -p cp.test -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split())
+    srcjavafolder = subprocess.check_output('defects4j export -p dir.src.classes -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split()).decode()
+    srctestfolder = subprocess.check_output('defects4j export -p dir.src.tests -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split()).decode()
+    binjavafolder = subprocess.check_output('defects4j export -p dir.bin.classes -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split()).decode()
+    bintestfolder = subprocess.check_output('defects4j export -p cp.test -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split()).decode()
+    dependencies = subprocess.check_output('defects4j export -p cp.test -w {}'.format(BUG_SRC_LOCATION+src_bug_id).split()).decode()
 except:
     raise ValueError('引数のうちいずれかが取得できませんでした')
 
@@ -23,6 +23,7 @@ print(bintestfolder)
 print(' : ', end='')
 bintestfolder = input()
 
+print('↓これをコピペすればOK')
 print('\
 java -cp $(cat /tmp/astor-classpath.txt):target/classes fr.inria.main.evolution.AstorMain \
 -srcjavafolder {} \
