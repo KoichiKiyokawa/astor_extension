@@ -4,6 +4,14 @@ ouput_file = sys.argv[1]
 with open(ouput_file, 'r') as f:
     output_str = f.read()
 
+    output_status_start_idx = output_str.find("OUTPUT_STATUS=")
+    output_status_end_idx = output_str.find("Patch stats:")
+    output_status = output_str[output_status_start_idx: output_status_end_idx - 1]
+
+    whole_time_start_idx = output_str.find("Time Total(s):")
+    whole_time_end_idx = output_str.find("Node: ")
+    whole_time = output_str[whole_time_start_idx:whole_time_end_idx]
+
     patch_start_idx = output_str.find("diffpatch=")
     patch_end_idx = output_str.find("diffpatchoriginal=")
     patch = output_str[patch_start_idx:patch_end_idx]
@@ -16,8 +24,8 @@ with open(ouput_file, 'r') as f:
     generation_end_idx = output_str.find("ingredientScope=")
     generation = output_str[generation_start_idx:generation_end_idx]
 
-    print("{}\n{}\n{}\n".format(
-        patch, total_time, generation))
+    print("{}\n{}\n{}\n{}\n{}\n".format(
+        output_status, whole_time, patch, total_time, generation))
 
     def get_first_str(line):
         if len(line) == 0:
