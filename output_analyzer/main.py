@@ -4,6 +4,11 @@ ouput_file = sys.argv[1]
 with open(ouput_file, 'r') as f:
     output_str = f.read()
 
+    bug_id = output_str[output_str.find(
+        "-id ") + len("-id "): output_str.find(" -failing")]
+    scope = output_str[output_str.find(
+        "-scope ") + len("-scope "):output_str.find("-population")]
+
     output_status_start_idx = output_str.find("OUTPUT_STATUS=")
     output_status_end_idx = output_str.find("Patch stats:")
     output_status = output_str[output_status_start_idx: output_status_end_idx - 1]
@@ -36,4 +41,16 @@ with open(ouput_file, 'r') as f:
         return line[0]
 
     first_strs = list(map(get_first_str, patch.split("\n")))
-    print("add: {}, del: {}".format(first_strs.count("+"), first_strs.count("-")))
+    add_del_stat = "add: {} del: {}".format(
+        first_strs.count("+"), first_strs.count("-"))
+    print(add_del_stat)
+
+    stat = ""
+    if output_status == "OUTPUT_STATUS=ERROR\n":
+        stat = "error"
+    elif output_status == "OUTPUT_STATUS=TIME_OUT\n":
+        stat = "timeout"
+    else:
+        stat = whole_time[len("Time Total(s):"):-3]
+    print("csv:\n{},{},{},{},{},{}".format(
+        bug_id, scope, stat, total_time[len("TOTAL_TIME="):-1], add_del_stat, generation[len("generation= "):]))
