@@ -16,8 +16,16 @@ with open(ouput_file, 'r') as f:
     generation_end_idx = output_str.find("ingredientScope=")
     generation = output_str[generation_start_idx:generation_end_idx]
 
-    print("{}\n{}\{}\n".format(
+    print("{}\n{}\n{}\n".format(
         patch, total_time, generation))
 
-    #print("add: {}, del: {}".format(patch.split("\n").map(lambda line: line[0]).count("+"), patch.split("\n").map(lambda line: line[0]).count("-"))
-    print(list(map(lambda line: line[0], patch.split("\n"))))
+    def get_first_str(line):
+        if len(line) == 0:
+            return ""
+        elif len(line) >= 3:
+            if line[:3] == "+++":
+                return ""
+        return line[0]
+
+    first_strs = list(map(get_first_str, patch.split("\n")))
+    print("add: {}, del: {}".format(first_strs.count("+"), first_strs.count("-")))
