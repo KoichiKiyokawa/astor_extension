@@ -1,3 +1,3 @@
-# astor_extension
+# astor_utils
 
-Astorの拡張とか、Astorの実行を補助するツールをプッシュする
+Astorの拡張とか、Astorの実行を補助するツール群
