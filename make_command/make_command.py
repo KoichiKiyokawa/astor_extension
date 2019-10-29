@@ -2,8 +2,8 @@ import subprocess
 import sys
 
 # 環境によって変わる定数
-# BUG_SRC_LOCATION = '/home/kiyokawa/defects4j/tmp/'
-BUG_SRC_LOCATION = '/Users/koichi/autoBugRepair/defects4j/tmp/'
+BUG_SRC_LOCATION = '/home/kiyokawa/defects4j/tmp/'
+# BUG_SRC_LOCATION = '/Users/koichi/autoBugRepair/defects4j/tmp/'
 
 # 修正対象の名前を入力
 # ex) chart_1
