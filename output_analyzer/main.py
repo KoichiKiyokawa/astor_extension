@@ -52,5 +52,8 @@ with open(ouput_file, 'r') as f:
         stat = "timeout"
     else:
         stat = whole_time[len("Time Total(s):"):-3]
+        total_time_num = total_time[len("TOTAL_TIME="):-1]
+        generation_num = generation[len("generation= "):-1]
     print("csv:\n{},{},{},{},{},{}".format(
-        bug_id, scope, stat, total_time[len("TOTAL_TIME="):-1], add_del_stat, generation[len("generation= "):]))
+        bug_id, scope, stat, total_time_num, add_del_stat, generation_num))
+    print("{}({})".format(round(float(total_time_num), 1), generation_num))
