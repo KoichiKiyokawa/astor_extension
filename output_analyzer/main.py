@@ -1,9 +1,9 @@
 import sys
 
-ouput_file = sys.argv[1]
+output_file = sys.argv[1]
 if output_file[-4:] != '.out':
   output_file += '.out'
-with open(ouput_file, 'r') as f:
+with open(output_file, 'r') as f:
     output_str = f.read()
 
     bug_id = output_str[output_str.find(
