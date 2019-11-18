@@ -1,6 +1,8 @@
 import sys
 
 ouput_file = sys.argv[1]
+if output_file[-4:] != '.out':
+  output_file += '.out'
 with open(ouput_file, 'r') as f:
     output_str = f.read()
 
